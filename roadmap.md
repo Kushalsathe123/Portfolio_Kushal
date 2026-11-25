@@ -1,0 +1,4 @@
+- [ ] Build the single-page portfolio with the supplied portrait and reference styling.
+- [ ] Validate desktop/mobile display, navigation, filtering, and contact form behavior.
+- [ ] Confirm route metadata, tests, and preview health; commit the finished work.
+- [ ] Contact delivery: waiting for the user's preferred option.

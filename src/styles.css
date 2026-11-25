@@ -1,0 +1,504 @@
+/*
+ * Tailwind v4 entry: config lives here, with no tailwind.config.js or PostCSS plugin.
+ * - Keep every @import in this top block, above @theme and the rest of the file. Install an
+ *   npm package before @importing its CSS. Never @import a remote URL (web fonts, CDN CSS): the
+ *   build resolves @import from the filesystem. Load those with a <link> in the head() of
+ *   src/routes/__root.tsx and name the family in a --font-* token in @theme inline below.
+ */
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Design system definition.
+ *
+ * The design lives in this file: oklch color tokens on the shadcn variables
+ * (--background, --foreground, --primary, --secondary, --muted, --accent, ...) plus
+ * new tokens as needed, font tokens, and custom styles and animations.
+ *
+ * The @theme inline block maps CSS custom properties to Tailwind utility
+ * classes (e.g. --color-primary -> bg-primary, text-primary).
+ *
+ * The :root and .dark blocks define the actual color values using oklch.
+ * All colors MUST use oklch format.
+ *
+ * To add a new semantic color:
+ * 1. Add the variable to :root (light value) and .dark (dark value)
+ * 2. Register it in @theme inline as --color-<name>: var(--<name>)
+ */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ring-offset-background: var(--background);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-surface-warm: var(--surface-warm);
+  --color-accent-soft: var(--accent-soft);
+  --color-ink-soft: var(--ink-soft);
+  --font-sans: "Plus Jakarta Sans", sans-serif;
+}
+
+:root {
+  --radius: 0.45rem;
+  --background: oklch(0.972 0.017 78);
+  --foreground: oklch(0.17 0.025 267);
+  --card: oklch(0.995 0.004 82);
+  --card-foreground: oklch(0.17 0.025 267);
+  --popover: oklch(0.995 0.004 82);
+  --popover-foreground: oklch(0.17 0.025 267);
+  --primary: oklch(0.16 0.018 267);
+  --primary-foreground: oklch(0.99 0.004 82);
+  --secondary: oklch(0.949 0.022 78);
+  --secondary-foreground: oklch(0.2 0.022 267);
+  --muted: oklch(0.949 0.022 78);
+  --muted-foreground: oklch(0.49 0.019 267);
+  --accent: oklch(0.75 0.19 58);
+  --accent-foreground: oklch(0.16 0.018 267);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.984 0.003 247.858);
+  --border: oklch(0.88 0.018 76);
+  --input: oklch(0.88 0.018 76);
+  --ring: oklch(0.75 0.19 58);
+  --chart-1: oklch(0.646 0.222 41.116);
+  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+  --sidebar: oklch(0.995 0.004 82);
+  --sidebar-foreground: oklch(0.17 0.025 267);
+  --sidebar-primary: oklch(0.16 0.018 267);
+  --sidebar-primary-foreground: oklch(0.99 0.004 82);
+  --sidebar-accent: oklch(0.949 0.022 78);
+  --sidebar-accent-foreground: oklch(0.2 0.022 267);
+  --sidebar-border: oklch(0.88 0.018 76);
+  --sidebar-ring: oklch(0.75 0.19 58);
+  --surface-warm: oklch(0.956 0.026 77);
+  --accent-soft: oklch(0.91 0.065 71);
+  --ink-soft: oklch(0.34 0.022 267);
+}
+
+.dark {
+  --background: oklch(0.16 0.018 267);
+  --foreground: oklch(0.97 0.014 78);
+  --card: oklch(0.21 0.022 267);
+  --card-foreground: oklch(0.97 0.014 78);
+  --popover: oklch(0.21 0.022 267);
+  --popover-foreground: oklch(0.97 0.014 78);
+  --primary: oklch(0.75 0.19 58);
+  --primary-foreground: oklch(0.16 0.018 267);
+  --secondary: oklch(0.26 0.022 267);
+  --secondary-foreground: oklch(0.97 0.014 78);
+  --muted: oklch(0.26 0.022 267);
+  --muted-foreground: oklch(0.73 0.018 78);
+  --accent: oklch(0.75 0.19 58);
+  --accent-foreground: oklch(0.16 0.018 267);
+  --destructive: oklch(0.704 0.191 22.216);
+  --destructive-foreground: oklch(0.984 0.003 247.858);
+  --border: oklch(1 0 0 / 12%);
+  --input: oklch(1 0 0 / 18%);
+  --ring: oklch(0.75 0.19 58);
+  --chart-1: oklch(0.488 0.243 264.376);
+  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-3: oklch(0.769 0.188 70.08);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-5: oklch(0.645 0.246 16.439);
+  --sidebar: oklch(0.21 0.022 267);
+  --sidebar-foreground: oklch(0.97 0.014 78);
+  --sidebar-primary: oklch(0.75 0.19 58);
+  --sidebar-primary-foreground: oklch(0.16 0.018 267);
+  --sidebar-accent: oklch(0.26 0.022 267);
+  --sidebar-accent-foreground: oklch(0.97 0.014 78);
+  --sidebar-border: oklch(1 0 0 / 12%);
+  --sidebar-ring: oklch(0.75 0.19 58);
+  --surface-warm: oklch(0.23 0.022 267);
+  --accent-soft: oklch(0.34 0.08 58);
+  --ink-soft: oklch(0.78 0.018 78);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: "Plus Jakarta Sans", sans-serif;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 6rem;
+}
+
+::selection {
+  color: var(--primary-foreground);
+  background: var(--primary);
+}
+
+.portfolio-page {
+  overflow: clip;
+  background: var(--background);
+}
+
+.portfolio-wrap {
+  width: min(100% - 3rem, 82rem);
+  margin-inline: auto;
+}
+
+.portfolio-nav {
+  background: color-mix(in oklab, var(--background) 84%, transparent);
+  backdrop-filter: blur(18px);
+}
+
+/* ============================== HERO ============================== */
+
+.hero-stage {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  /* fills the screen under the 5rem navbar, never taller than 58rem */
+  min-height: clamp(36rem, calc(100svh - 5rem), 58rem);
+  display: flex;
+  align-items: stretch;
+  background: var(--background);
+}
+
+/* background photo: blurred, with a cream fade on the left for readable text */
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: -3;
+  overflow: hidden;
+}
+
+.hero-bg::before {
+  content: "";
+  position: absolute;
+  inset: -1rem;                      /* hides blur edges */
+  background: url("/hero-bg.png") 100% 55% / cover no-repeat;
+  filter: blur(3px) saturate(1.05);
+}
+
+.hero-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg,
+    var(--background) 0%,
+    var(--background) 22%,
+    color-mix(in oklab, var(--background) 78%, transparent) 36%,
+    color-mix(in oklab, var(--background) 25%, transparent) 56%,
+    transparent 74%);
+}
+
+/* big soft translucent circle behind the portrait (3 layers: blob, ::before, ::after) */
+.hero-blob {
+  position: absolute;
+  z-index: -2;
+  top: -7rem;
+  right: 30%;
+  width: 28rem;
+  height: 28rem;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%,
+    color-mix(in oklab, #fff 35%, transparent),
+    color-mix(in oklab, var(--foreground) 12%, transparent));
+  filter: blur(2px);
+}
+
+/* layer 2: middle circle */
+.hero-blob::before {
+  content: "";
+  position: absolute;
+  top: 2%;
+  left: 12%;
+  width: 78%;
+  height: 78%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%,
+    color-mix(in oklab, #fff 22%, transparent),
+    color-mix(in oklab, #fff 6%, transparent));
+}
+
+/* layer 3: inner circle (glass look) */
+.hero-blob::after {
+  content: "";
+  position: absolute;
+  top: 10%;
+  left: 20%;
+  width: 56%;
+  height: 56%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%,
+    color-mix(in oklab, #fff 38%, transparent),
+    color-mix(in oklab, #fff 10%, transparent));
+  box-shadow: inset 0 0 2rem color-mix(in oklab, #fff 25%, transparent);
+}
+
+/* dark charcoal wedge in the bottom-right corner */
+.hero-wedge {
+  position: absolute;
+  z-index: 10;
+  right: 0;
+  bottom: 0;
+  width: min(22rem, 26vw);
+  height: min(15rem, 22%);
+  pointer-events: none;
+}
+
+/* golden border along the slanted top edge */
+.hero-wedge::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #FFD24D, #F7A81B 55%, #F59E0B);
+  clip-path: polygon(33% 100%, 100% 0, 100% 100%);
+}
+
+/* dark wedge sits on top of the gold, so only a thin gold edge shows */
+.hero-wedge::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--primary);
+  clip-path: polygon(38% 100%, 100% 6%, 100% 100%);
+}
+
+.hero-grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr);
+  align-items: center;
+  /* keep the site gutters (same as .portfolio-wrap) */
+  width: min(100% - 3rem, 82rem);
+  margin-inline: auto;
+}
+
+.hero-copy {
+  position: relative;
+  z-index: 3;
+  padding-block: 0.75rem;
+  /* shift the whole text block to the right: increase this (e.g. 1.5rem) */
+  padding-left: 0.5rem;
+}
+
+.hero-title {
+  /* wider/bigger heading: raise the middle (vw) value or the last (rem) value */
+  font-size: clamp(3rem, 5.3vw, 5.2rem);
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+}
+
+.hero-art {
+  position: relative;
+  align-self: end;
+  justify-self: end;
+  width: 115%;
+  max-width: 40rem;
+  height: min(100%, 44rem);
+  min-height: 30rem;
+  pointer-events: none;
+}
+
+/* thick curved golden sweep behind the shoulder */
+.hero-arc {
+  position: absolute;
+  z-index: 0;
+  right: -18%;
+  bottom: 0;
+  width: 106%;
+  height: 90%;
+  overflow: visible;
+  clip-path: none;
+}
+
+.hero-dots {
+  position: absolute;
+  z-index: 0;
+  top: 3%;
+  right: 0%;
+  width: 8rem;
+  height: 6rem;
+  background-image: radial-gradient(#fff 1.7px, transparent 1.7px);
+  background-size: 1rem 1rem;
+  opacity: 0.8;
+}
+
+.hero-portrait {
+  position: absolute;
+  z-index: 2;
+  right: -15%;
+  bottom: -1px;
+  display: block;
+  width: auto;
+  height: 100%;
+  max-width: 100%;
+  object-fit: contain;
+  object-position: bottom right;
+  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 2%);
+  mask-image: linear-gradient(to right, transparent 0, #000 2%);
+  filter: drop-shadow(0 1rem 2rem color-mix(in oklab, var(--foreground) 14%, transparent));
+}
+
+.hero-stat + .hero-stat {
+  border-left: 1px solid var(--border);
+}
+
+.accent-swoosh {
+  position: relative;
+  white-space: nowrap;
+}
+
+.accent-swoosh::after {
+  position: absolute;
+  right: -0.06em;
+  bottom: -0.12em;
+  left: -0.02em;
+  height: 0.16em;
+  border-top: 0.09em solid var(--accent);
+  border-radius: 50%;
+  content: "";
+  transform: rotate(-2deg);
+}
+
+/* ============================ OTHER SECTIONS ============================ */
+
+.section-tone {
+  background: linear-gradient(180deg, var(--background), var(--surface-warm));
+}
+
+.section-line {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border) 12%, var(--border) 88%, transparent);
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(1.25rem);
+  transition: opacity 650ms ease, transform 650ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.skill-chip {
+  border: 1px solid var(--border);
+  background: color-mix(in oklab, var(--card) 80%, transparent);
+}
+
+.project-card,
+.service-card,
+.credential-card {
+  border: 1px solid var(--border);
+  background: var(--card);
+  box-shadow: 0 0.75rem 2.25rem -1.5rem color-mix(in oklab, var(--foreground) 25%, transparent);
+  transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
+}
+
+.project-card:hover,
+.service-card:hover,
+.credential-card:hover {
+  border-color: color-mix(in oklab, var(--accent) 54%, var(--border));
+  box-shadow: 0 1.1rem 2.4rem -1.4rem color-mix(in oklab, var(--foreground) 32%, transparent);
+  transform: translateY(-3px);
+}
+
+.contact-panel {
+  background:
+    radial-gradient(ellipse at top right, color-mix(in oklab, var(--accent) 17%, transparent), transparent 28rem),
+    var(--primary);
+  color: var(--primary-foreground);
+}
+
+.timeline-rail::before {
+  position: absolute;
+  top: 0.5rem;
+  bottom: 0.75rem;
+  left: 0.35rem;
+  width: 1px;
+  background: var(--border);
+  content: "";
+}
+
+.status-pulse {
+  animation: status-pulse 1.8s ease-in-out infinite;
+}
+
+@keyframes status-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 color-mix(in oklab, oklch(0.69 0.18 145) 38%, transparent); }
+  50% { box-shadow: 0 0 0 0.3rem transparent; }
+}
+
+/* ============================== RESPONSIVE ============================== */
+
+@media (max-width: 1023px) {
+  .hero-bg::after {
+    background: linear-gradient(180deg,
+      var(--background) 0%,
+      color-mix(in oklab, var(--background) 88%, transparent) 50%,
+      color-mix(in oklab, var(--background) 35%, transparent) 100%);
+  }
+  .hero-stage { min-height: auto; }
+  .hero-grid { grid-template-columns: 1fr; gap: 0; }
+  .hero-copy { padding-block: 2.5rem 0.5rem; padding-left: 0; }
+  .hero-art { width: 100%; justify-self: center; max-width: 30rem; height: 30rem; min-height: 0; margin-top: 1rem; }
+}
+
+@media (max-width: 767px) {
+  .portfolio-wrap, .hero-grid { width: min(100% - 2rem, 82rem); }
+  .hero-art { height: 24rem; max-width: 22rem; }
+  .hero-arc { right: -6%; width: 100%; height: 82%; }
+  .hero-dots { display: none; }
+  .hero-wedge { width: 9rem; height: 6rem; }
+  .hero-stat { padding-right: 1rem; }
+  .hero-stat + .hero-stat { padding-left: 1rem; }
+  .hero-stat:last-child { border-left: 0; padding-left: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+  .reveal { opacity: 1; transform: none; }
+}
